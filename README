@@ -1,0 +1,13 @@
+This RubyGem allows Ruby Coders to access the information contained on callook.info, an online Amateur Radio Callsign Lookup service, run by Joshua Dick, W1JDD.
+
+The gem is easy to use and should work something like this:
+
+#!/usr/bin/ruby
+require 'rubygems'
+require 'callsign'
+call = CallSign.new("w1aw")
+puts call.address
+
+
+-------------------------------------------------
+

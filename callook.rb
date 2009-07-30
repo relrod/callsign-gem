@@ -41,6 +41,18 @@ class CallSign
 			return ele.elements['name'].text
 		end
 	end
+	
+	def type
+		@callinfo.elements.each("callook") do |ele|
+			return ele.elements['type'].text
+		end
+	end
+
+	def status
+		@callinfo.elements.each("callook") do |ele|
+			return ele.elements['status'].text
+		end
+	end
 
 	def class
 		@callinfo.elements.each("callook/current") do |ele|

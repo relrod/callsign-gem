@@ -11,3 +11,22 @@ puts call.address
 
 -------------------------------------------------
 
+Well since I can't figure rdoc out, I'll tell you that CallSignRb has the following functions:
+
+address(sep = "\n") - you can specify a separator if you don't want newlines.
+name
+callsign
+previouscallsign
+trusteecallsign
+trusteename
+type
+status
+class
+previousclass
+latitude
+longitude
+gridsquare
+grantdate
+expirydate
+lastaction
+frn

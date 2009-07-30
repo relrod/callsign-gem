@@ -17,6 +17,30 @@ class CallSign
 			return ele.elements['name'].text
 		end
 	end
+	
+	def callsign
+		@callinfo.elements.each("callook/current") do |ele|
+			return ele.elements['callsign'].text
+		end
+	end
+
+	def previouscallsign
+		@callinfo.elements.each("callook/previous") do |ele|
+			return ele.elements['callsign'].text
+		end
+	end
+
+	def trusteecallsign
+		@callinfo.elements.each("callook/trustee") do |ele|
+			return ele.elements['callsign'].text
+		end
+	end
+
+	def trusteename
+		@callinfo.elements.each("callook/trustee") do |ele|
+			return ele.elements['name'].text
+		end
+	end
 
 	def class
 		@callinfo.elements.each("callook/current") do |ele|
@@ -73,5 +97,5 @@ class CallSign
 	end
 end
 
-p = CallSign.new("kb3llm")
-puts p.previousclass
+p = CallSign.new("w3ok")
+puts p.trusteename

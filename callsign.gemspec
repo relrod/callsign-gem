@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.files       = ["lib/callsign.rb"]
   s.homepage    = 'http://github.com/codeblock/callsign-gem'
   s.rubyforge_project = 'CallSignRb'
-  # s.add_dependency "nokogiri", "~> 1.5.0"
+  s.add_dependency 'json'
 end

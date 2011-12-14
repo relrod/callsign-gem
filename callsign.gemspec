@@ -1,23 +1,13 @@
-# -*- encoding: utf-8 -*-
-
 Gem::Specification.new do |s|
-  s.name = %q{callsign}
-  s.version = "1.0.3"
-
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Rick E."]
-  s.date = %q{2009-07-30}
-  s.description = %q{This RubyGem allows Ruby Coders to access the information contained on callook.info, an online Amateur Radio Callsign Lookup service, run by Joshua Dick, W1JDD.}
-  s.email = %q{codeblock@eighthbit.net}
-  s.files = ["README", "lib/callsign.rb"]
-  s.has_rdoc = true
-  s.homepage = %q{http://github.com/codeblock/CallSignRb}
-  s.rubyforge_project = %q{CallSignRb}
-  s.rubygems_version = %q{1.3.0}
-  s.summary = %q{This RubyGem allows Ruby Coders to access the information contained on callook.info, an online Amateur Radio Callsign Lookup service, run by Joshua Dick, W1JDD.}
-
-  if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 2
-  end
+  s.name        = 'callsign'
+  s.version     = '2.0.0'
+  s.date        = '2011-12-14'
+  s.summary     = "Look up United States Amateur (ham) Radio callsign information."
+  s.description = "Provides a simple Ruby interface to the callook.info API by Joshua Dick, W1JDD."
+  s.authors     = ["Ricky Elrod"]
+  s.email       = 'ricky@elrod.me'
+  s.files       = ["lib/callsign.rb"]
+  s.homepage    = 'http://github.com/codeblock/callsign-gem'
+  s.rubyforge_project = 'CallSignRb'
+  # s.add_dependency "nokogiri", "~> 1.5.0"
 end

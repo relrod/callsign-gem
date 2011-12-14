@@ -1,110 +1,29 @@
-#!/usr/bin/env ruby
-require 'rexml/document'
-require 'open-uri'
-class CallSign
-	def initialize(callsign,prefixes=false)
-		@callinfo = REXML::Document.new(open("http://callook.info/index.php?callsign=#{callsign}&display=xml"))
-	end
+require 'rubygems'
+require 'uri'
+require 'net/http'
+require 'json'
 
-	def address(sep = "\n")
-		@callinfo.elements.each("callook/address") do |ele|
-			return ele.elements['line1'].text + sep + ele.elements['line2'].text
-		end
-	end
-	
-	def name
-		@callinfo.elements.each("callook") do |ele|
-			return ele.elements['name'].text
-		end
-	end
-	
-	def callsign
-		@callinfo.elements.each("callook/current") do |ele|
-			return ele.elements['callsign'].text
-		end
-	end
+class Callsign
+  def initialize(callsign)
+    json_uri = URI.parse "http://callook.info/#{callsign}/json"
+    json_response = Net::HTTP.new(json_uri.host, json_uri.port).get(json_uri.path).body
+    @json = JSON.parse json_response
 
-	def previouscallsign
-		@callinfo.elements.each("callook/previous") do |ele|
-			return ele.elements['callsign'].text
-		end
-	end
-
-	def trusteecallsign
-		@callinfo.elements.each("callook/trustee") do |ele|
-			return ele.elements['callsign'].text
-		end
-	end
-
-	def trusteename
-		@callinfo.elements.each("callook/trustee") do |ele|
-			return ele.elements['name'].text
-		end
-	end
-	
-	def type
-		@callinfo.elements.each("callook") do |ele|
-			return ele.elements['type'].text
-		end
-	end
-
-	def status
-		@callinfo.elements.each("callook") do |ele|
-			return ele.elements['status'].text
-		end
-	end
-
-	def class
-		@callinfo.elements.each("callook/current") do |ele|
-			return ele.elements['class'].text
-		end		
-	end
-
-	def previousclass
-		@callinfo.elements.each("callook/previous") do |ele|
-			return ele.elements['class'].text
-		end
-	end
-
-	def latitude
-		@callinfo.elements.each("callook/location") do |ele|
-			return ele.elements['latitude'].text
-		end
-	end
-
-	def longitude
-		@callinfo.elements.each("callook/location") do |ele|
-			return ele.elements['logitude'].text
-		end
-	end
-
-	def gridsquare
-		@callinfo.elements.each("callook/location") do |ele|
-			return ele.elements['gridsquare'].text
-		end
-	end
-
-	def grantdate
-		@callinfo.elements.each("callook/otherinfo") do |ele|
-			return ele.elements['grantdate'].text
-		end
-	end
-
-	def expirydate
-		@callinfo.elements.each("callook/otherinfo") do |ele|
-			return ele.elements['expirydate'].text
-		end
-	end
-
-	def lastaction
-		@callinfo.elements.each("callook/otherinfo") do |ele|
-			return ele.elements['lastactiondate'].text
-		end
-	end
-
-	def frn
-		@callinfo.elements.each("callook/otherinfo") do |ele|
-			return ele.elements['frn'].text
-		end
-	end
+    # Handle invalid/update before the user can do anything that
+    # would error anyway.
+    case @json['status']
+    when 'INVALID'
+      raise 'Invalid callsign'
+    when 'UPDATING'
+      raise 'Callook.info offline for daily update'
+    end
+  end
+  
+  # This literally passes to the JSON response that we get.
+  # This means that if the server returns a string for a key, you will get that.
+  # If it returns a hash with more info, so will we. Hey, this is 2.0.0 baby.
+  # We're allowed to play hardball.
+  def method_missing(name)
+    @json[name.to_s]
+  end
 end

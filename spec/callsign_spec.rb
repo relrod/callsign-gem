@@ -8,6 +8,6 @@ describe Callsign do
   end
 
   it "should raise an exception on invalid callsign" do
-    lambda { Callsign.new('w333333w') }.should raise_error
+    lambda { Callsign.new('w333333w') }.should raise_error(InvalidCallsignException)
   end
 end

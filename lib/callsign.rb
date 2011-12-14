@@ -1,7 +1,14 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+# (c) 2011-present. Ricky Elrod <ricky@elrod.me>
+# Released under the MIT license.
 require 'rubygems'
 require 'uri'
 require 'net/http'
 require 'json'
+
+class InvalidCallsignException < StandardError; end
+class CallookUpdateException < StandardError; end
 
 class Callsign
   def initialize(callsign)
@@ -13,9 +20,9 @@ class Callsign
     # would error anyway.
     case @json['status']
     when 'INVALID'
-      raise 'Invalid callsign'
+      raise InvalidCallsignException, 'Invalid callsign'
     when 'UPDATING'
-      raise 'Callook.info offline for daily update'
+      raise CallookUpdateException, 'Callook.info offline for daily update'
     end
   end
   

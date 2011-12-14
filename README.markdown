@@ -13,7 +13,10 @@ How to use
 
 Invalid callsigns, or attempts to use `callsign` when callook.info
 is down for its daily update will result in an exception being
-thrown. You should catch this if you need to handle it gracefully.
+thrown. You should catch these if you need to handle it gracefully.
+
+They are called `InvalidCallsignException` and `CallookUpdateException`
+respectively.
 
     >> require 'rubygems'
     >> require 'callsign'
@@ -25,5 +28,5 @@ thrown. You should catch this if you need to handle it gracefully.
     => "RICHARD B ELROD" 
 
     >> invalid = Callsign.new 'ZZ2YYY'
-    RuntimeError: Invalid callsign
+    InvalidCallsignException: Invalid callsign
 

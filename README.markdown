@@ -30,3 +30,11 @@ respectively.
     >> invalid = Callsign.new 'ZZ2YYY'
     InvalidCallsignException: Invalid callsign
 
+
+Contributing, Licensing, etc.
+=============================
+
+I gladly accept contributions to this project. I would be even more thrilled
+if they included tests to go along with them. The project is released under
+the MIT license. Information about the Callook API can be found at
+[http://callook.info/api_reference.php](http://callook.info/api_reference.php).

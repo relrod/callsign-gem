@@ -10,4 +10,8 @@ describe Callsign do
   it "should raise an exception on invalid callsign" do
     lambda { Callsign.new('w333333w') }.should raise_error(InvalidCallsignException)
   end
+
+  it "should raise an invalid http response exception if we get a 404 back" do
+    lambda { Callsign.new('asdf_fdsa') }.should raise_error(InvalidHTTPResponseException)
+  end
 end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-# (c) 2011-present. Ricky Elrod <ricky@elrod.me>
+# (c) 2012-present. Ricky Elrod <ricky@elrod.me>
 # Released under the MIT license.
 require 'rubygems'
 require 'uri'
@@ -8,13 +8,15 @@ require 'net/http'
 require 'json'
 
 class InvalidCallsignException < StandardError; end
+class InvalidHTTPResponseException < StandardError; end
 class CallookUpdateException < StandardError; end
 
 class Callsign
   def initialize(callsign)
     json_uri = URI.parse "http://callook.info/#{callsign}/json"
-    json_response = Net::HTTP.new(json_uri.host, json_uri.port).get(json_uri.path).body
-    @json = JSON.parse json_response
+    json_response = Net::HTTP.new(json_uri.host, json_uri.port).get(json_uri.path)
+    raise InvalidHTTPResponseException if json_response.code.to_i > 200
+    @json = JSON.parse json_response.body
 
     # Handle invalid/update before the user can do anything that
     # would error anyway.

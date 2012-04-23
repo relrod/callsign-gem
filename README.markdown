@@ -1,6 +1,8 @@
 Callsign Gem
 ============
 
+[![Build Status](https://secure.travis-ci.org/CodeBlock/callsign-gem.png?branch=master)](http://travis-ci.org/CodeBlock/callsign-gem)
+
 This gem accesses the [Callook.info](http://callook.info) API,
 made by Joshua Dick, W1JDD.
 

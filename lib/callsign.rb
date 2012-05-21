@@ -31,7 +31,7 @@ class Callsign
     end
   end
 
-  def Callsign.search(callsign)
+  def self.search(callsign)
     Hashie::Mash.new(Callsign.new(callsign).json)
   end
   

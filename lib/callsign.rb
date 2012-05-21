@@ -6,12 +6,15 @@ require 'rubygems'
 require 'uri'
 require 'net/http'
 require 'json'
+require 'hashie'
 
 class InvalidCallsignException < StandardError; end
 class InvalidHTTPResponseException < StandardError; end
 class CallookUpdateException < StandardError; end
 
 class Callsign
+  attr_accessor :json
+
   def initialize(callsign)
     json_uri = URI.parse "http://callook.info/#{callsign}/json"
     json_response = Net::HTTP.new(json_uri.host, json_uri.port).get(json_uri.path)
@@ -26,6 +29,10 @@ class Callsign
     when 'UPDATING'
       raise CallookUpdateException, 'Callook.info offline for daily update'
     end
+  end
+
+  def Callsign.search(callsign)
+    Hashie::Mash.new(Callsign.new(callsign).json)
   end
   
   # This literally passes to the JSON response that we get.

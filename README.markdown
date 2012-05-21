@@ -23,13 +23,16 @@ respectively.
     >> require 'rubygems'
     >> require 'callsign'
 
-    >> me = Callsign.new 'n8sql'
-    => #<Callsign:0x7fdbc72930d8 @json={"address"=>{"line1"=>"410 HERMS CT APT 14", "line2"=>"BARBERTON, OH 44203", "attn"=>""}, "name"=>"RICHARD B ELROD", "otherInfo"=>{"ulsUrl"=>"http://wireless2.fcc.gov/UlsApp/UlsSearch/license.jsp?licKey=3237962", "grantDate"=>"10/30/2010", "frn"=>"0011477486", "expiryDate"=>"10/30/2020", "lastActionDate"=>"11/17/2011"}, "location"=>{"latitude"=>"40.999965", "gridsquare"=>"EN90ex", "longitude"=>"-81.589174"}, "previous"=>{"operClass"=>"TECHNICIAN", "callsign"=>"KB3LLM"}, "trustee"=>{"name"=>"", "callsign"=>""}, "current"=>{"operClass"=>"GENERAL", "callsign"=>"N8SQL"}, "type"=>"PERSON", "status"=>"VALID"}> 
+    >> me = Callsign.search 'n8sql'
+    => #<Hashie::Mash address=#<Hashie::Mash attn="" line1="410 HERMS CT APT 14" line2="BARBERTON, OH 44203"> current=#<Hashie::Mash callsign="N8SQL" operClass="GENERAL"> location=#<Hashie::Mash gridsquare="EN90ex" latitude="40.999965" longitude="-81.589174" quality="87"> name="RICHARD B ELROD" otherInfo=#<Hashie::Mash expiryDate="10/30/2020" frn="0011477486" grantDate="10/30/2010" lastActionDate="11/17/2011" ulsUrl="http://wireless2.fcc.gov/UlsApp/UlsSearch/license.jsp?licKey=3237962"> previous=#<Hashie::Mash callsign="KB3LLM" operClass="TECHNICIAN"> status="VALID" trustee=#<Hashie::Mash callsign="" name=""> type="PERSON">
 
     >> me.name
     => "RICHARD B ELROD" 
 
-    >> invalid = Callsign.new 'ZZ2YYY'
+    >> me.current.callsign
+    => "N8SQL"
+
+    >> invalid = Callsign.search 'ZZ2YYY'
     InvalidCallsignException: Invalid callsign
 
 
